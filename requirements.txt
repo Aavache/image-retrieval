@@ -1,7 +1,10 @@
-fastapi
-pymilvus
-python-dotenv
-python-multipart
-torch
-torchvision
-uvicorn
+fastapi==0.103.2
+milvus==2.2.14
+pre-commit==3.4.0
+pre-commit==3.4.0
+pymilvus==2.3.0
+python-dotenv==1.0.0
+python-multipart==0.0.6
+torch==2.1.1
+torchvision==0.16.1
+uvicorn[standard]==0.23.2

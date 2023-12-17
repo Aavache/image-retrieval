@@ -12,10 +12,11 @@ class ResNet50(base.Model):
     def __init__(self) -> None:
         self._model = models.resnet50(pretrained=True)
         self._model.eval()
+        self._setup_transform()
 
     @staticmethod
     def embedding_dimensions() -> int:
-        return 2048
+        return 1000
 
     def _setup_transform(self) -> None:
         self._transform = transforms.Compose(
@@ -28,7 +29,7 @@ class ResNet50(base.Model):
         )
 
     def _preprocess(self, image_bytes) -> List[float]:
-        image = Image.open(io.BytesIO(image_bytes))
+        image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
         return self._transform(image).unsqueeze(0)
 
     def _postprocess(self, embedding: torch.Tensor) -> List[float]:

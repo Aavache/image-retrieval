@@ -16,18 +16,14 @@ connect_to_db()
 
 @app.post("/register/")
 async def register_image(image_id: str, file: UploadFile = File(...), model_id: str = "resnet50"):
-    try:
-        image_bytes = await file.read()
+    image_bytes = await file.read()
 
-        insert(
-            image_id,
-            model_id,
-            infer_embedding(image_bytes, model_id),
-        )
-    except Exception as e:
-        return e
-    else:
-        return {"message": "Image registered", "Image ID": image_id}
+    insert(
+        image_id,
+        model_id,
+        infer_embedding(image_bytes, model_id),
+    )
+    return {"message": "Image was registered"}
 
 
 @app.post("/retrieve/")
